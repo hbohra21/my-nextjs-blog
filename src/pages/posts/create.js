@@ -1,27 +1,15 @@
 import React, { useState } from 'react';
 import Layout from '../../components/Layout';
 import PostForm from '../../components/PostForm';
-import { useForm } from 'react-hook-form';
-import { Modal, Button } from 'antd';
 
 const CreatePost = () => {
-    const { handleSubmit, reset, formState: { isSubmitting } } = useForm();
-    const [isSuccessModalVisible, setSuccessModalVisible] = useState(false);
+    const [formData, setFormData] = useState({ title: '', content: '', author: '' });
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const showSuccessModal = () => {
-        setSuccessModalVisible(true);
-    };
-
-    const handleSuccessModalOk = () => {
-        setSuccessModalVisible(false);
-    };
-
-    const handleSuccessModalCancel = () => {
-        setSuccessModalVisible(false);
-    };
-
-    const handleFormSubmit = async (formData) => {
+    const handleFormSubmit = async () => {
         try {
+            setIsSubmitting(true);
+
             const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
                 method: 'POST',
                 headers: {
@@ -34,39 +22,35 @@ const CreatePost = () => {
                 const postData = await response.json();
                 console.log('Post created:', postData);
 
-                showSuccessModal();
+                // Show a simple alert instead of Ant Design Modal
+                window.alert('Your post has been created successfully!');
 
-                reset();
+                setFormData({ title: '', content: '', author: '' });
             } else {
                 console.error('Failed to create post');
             }
         } catch (error) {
             console.error('Error in form submission:', error);
+        } finally {
+            setIsSubmitting(false);
         }
     };
 
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
 
     return (
         <Layout>
             <div style={containerStyle}>
                 <h2 style={headingStyle}>Create a New Blog</h2>
-                <PostForm onSubmit={handleFormSubmit} resetForm={reset} isSubmitting={isSubmitting} />
+                <PostForm
+                    formData={formData}
+                    handleChange={handleChange}
+                    onSubmit={handleFormSubmit}
+                    isSubmitting={isSubmitting}
+                />
             </div>
-
-
-            <Modal
-                title="Post Created"
-                visible={isSuccessModalVisible}
-                onOk={handleSuccessModalOk}
-                onCancel={handleSuccessModalCancel}
-                footer={[
-                    <Button key="ok" type="primary" onClick={handleSuccessModalOk}>
-                        OK
-                    </Button>,
-                ]}
-            >
-                <p>Your post has been created successfully!</p>
-            </Modal>
         </Layout>
     );
 };
