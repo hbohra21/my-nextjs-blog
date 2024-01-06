@@ -1,3 +1,4 @@
+// components/PostList.js
 import React, { useRef, useCallback } from 'react';
 import Link from 'next/link';
 
@@ -21,8 +22,10 @@ const PostList = ({ posts, loadMore }) => {
             <ul className="list-unstyled">
                 {posts.map((post, index) => (
                     <li key={post.id} className="card mb-4" ref={index === posts.length - 1 ? lastPostRef : null}>
-                        <Link href="/posts/[id]" as={`/posts/${post.id}`}>
+                        <Link href={{ pathname: '/posts/[id]', query: { post: JSON.stringify(post) } }} as={`/posts/${post.id}`}>
+
                             <p className="card-title h4">{post.title}</p>
+
                         </Link>
                         {post.image && <img src={post.image} alt={`Image for ${post.title}`} className="card-img-top" />}
                         <div className="card-body">

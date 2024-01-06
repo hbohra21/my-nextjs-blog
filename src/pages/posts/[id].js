@@ -11,11 +11,8 @@ const PostDetailPage = ({ post }) => {
     );
 };
 
-export async function getServerSideProps({ params }) {
-
-    // const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${params.id}`);
-    const res = await fetch(`https://jsonplaceholder.org/posts/${params.id}`);
-    const post = await res.json();
+export async function getServerSideProps({ query }) {
+    const post = JSON.parse(query.post);
 
     return {
         props: {

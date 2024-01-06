@@ -10,7 +10,7 @@ const PostDetail = ({ post }) => {
                     <p className="card-text">{post.content}</p>
                     <p className="card-text"><small className="text-muted">Author: {post.author}</small></p>
                     <p className="card-text"><small className="text-muted">Published At: {post.publishedAt}</small></p>
-                    <a href={post.url} target="_blank" rel="noopener noreferrer" className="btn btn-primary">Read More</a>
+                    {/* <a href={post.url} target="_blank" rel="noopener noreferrer" className="btn btn-primary">Read More</a> */}
                 </div>
             </div>
             <style jsx>{`
