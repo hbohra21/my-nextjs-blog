@@ -1,4 +1,3 @@
-// components/PostList.js
 import React, { useRef, useCallback } from 'react';
 import Link from 'next/link';
 
@@ -18,43 +17,49 @@ const PostList = ({ posts, loadMore }) => {
 
     return (
         <div className="container mt-4">
-            <h2>Blog Posts</h2>
-            <ul className="list-unstyled">
+            <h2 className="mb-4">Blog Posts</h2>
+            <div className="row">
                 {posts.map((post, index) => (
-                    <li key={post.id} className="card mb-4" ref={index === posts.length - 1 ? lastPostRef : null}>
-                        <Link href={{ pathname: '/posts/[id]', query: { post: JSON.stringify(post) } }} as={`/posts/${post.id}`}>
+                    <div key={post.id} className="col-md-6 mb-4">
+                        <div className="card">
+                            <Link href={{ pathname: '/posts/[id]', query: { post: JSON.stringify(post) } }} as={`/posts/${post.id}`}>
 
-                            <p className="card-title h4">{post.title}</p>
+                                {post.image && <img src={post.image} alt={`Image for ${post.title}`} className="card-img-top" />}
+                                <div className="card-body">
+                                    <h5 className="card-title">{post.title}</h5>
+                                    <p className="card-text post-content">{post.content}</p>
+                                </div>
 
-                        </Link>
-                        {post.image && <img src={post.image} alt={`Image for ${post.title}`} className="card-img-top" />}
-                        <div className="card-body">
-                            <p className="card-text post-content">{post.content}</p>
+                            </Link>
                         </div>
-                    </li>
+                    </div>
                 ))}
-            </ul>
+            </div>
+            {lastPostRef && (
+                <div ref={lastPostRef} className="text-center mt-4">
+                    <button className="btn btn-primary" onClick={loadMore}>
+                        Load More
+                    </button>
+                </div>
+            )}
             <style jsx>{`
-                /* Additional styles specific to this component if needed */
-
                 /* Override Bootstrap card styling */
                 .card {
-                    max-width: 800px;
-                    margin: 0 auto;
-                    border-radius: 5px;
                     border: 1px solid #ddd;
+                    border-radius: 8px;
+                    transition: transform 0.2s;
                 }
 
-                /* Override Bootstrap card title styling */
-                .card-title {
-                    color: #333;
+                /* Hover effect for cards */
+                .card:hover {
+                    transform: scale(1.05);
                 }
 
                 /* Override Bootstrap card image styling */
                 .card-img-top {
                     max-width: 100%;
                     height: auto;
-                    margin-bottom: 10px;
+                    border-radius: 8px 8px 0 0;
                 }
 
                 /* Override Bootstrap card text styling */
@@ -70,6 +75,16 @@ const PostList = ({ posts, loadMore }) => {
                     display: -webkit-box;
                     -webkit-line-clamp: 2; /* Limit to two lines */
                     -webkit-box-orient: vertical;
+                }
+
+                /* Custom styles for the "Load More" button */
+                .btn-primary {
+                    background-color: #0070f3;
+                    color: #fff;
+                }
+
+                .btn-primary:hover {
+                    background-color: #0056b3;
                 }
             `}</style>
         </div>

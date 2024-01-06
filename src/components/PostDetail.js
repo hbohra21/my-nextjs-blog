@@ -6,50 +6,71 @@ const PostDetail = ({ post }) => {
             <div className="card">
                 <div className="card-body">
                     <h2 className="card-title">{post.title}</h2>
-                    <img src={post.thumbnail} alt={`Thumbnail for ${post.title}`} className="card-img-top" />
+                    {post.thumbnail && (
+                        <img src={post.thumbnail} alt={`Thumbnail for ${post.title}`} className="card-img-top" />
+                    )}
                     <p className="card-text">{post.content}</p>
-                    <p className="card-text"><small className="text-muted">Author: {post.author}</small></p>
-                    <p className="card-text"><small className="text-muted">Published At: {post.publishedAt}</small></p>
-                    {/* <a href={post.url} target="_blank" rel="noopener noreferrer" className="btn btn-primary">Read More</a> */}
+                    <div className="card-text-meta">
+                        <p className="text-muted">Author: {post.author}</p>
+                        <p className="text-muted">Published At: {post.publishedAt}</p>
+                    </div>
+
                 </div>
             </div>
             <style jsx>{`
-                /* Additional styles specific to this component if needed */
-
-                /* Override Bootstrap card styling */
                 .card {
                     max-width: 800px;
                     margin: 0 auto;
-                    border-radius: 5px;
+                    border-radius: 8px;
                     border: 1px solid #ddd;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                    background-color: #fff;
                 }
 
-                /* Override Bootstrap card title styling */
+                .card-body {
+                    padding: 20px;
+                }
+
                 .card-title {
+                    font-size: 24px;
                     color: #333;
+                    margin-bottom: 16px;
                 }
 
-                /* Override Bootstrap card image styling */
                 .card-img-top {
                     max-width: 100%;
                     height: auto;
-                    margin-bottom: 10px;
+                    margin-bottom: 16px;
+                    border-radius: 8px;
                 }
 
-                /* Override Bootstrap card text styling */
                 .card-text {
                     color: #555;
                     line-height: 1.6;
                 }
 
-                /* Override Bootstrap button styling */
+                .card-text-meta {
+                    margin-top: 16px;
+                    display: flex;
+                    justify-content: space-between;
+                }
+
+                .text-muted {
+                    color: #777;
+                    font-size: 14px;
+                }
+
                 .btn-primary {
                     color: #fff;
                     background-color: #0070f3;
                     border: none;
+                    padding: 10px 16px;
+                    border-radius: 4px;
+                    text-decoration: none;
+                    display: inline-block;
+                    cursor: pointer;
                 }
 
-                /* Override Bootstrap button hover styling */
                 .btn-primary:hover {
                     background-color: #0056b3;
                 }
