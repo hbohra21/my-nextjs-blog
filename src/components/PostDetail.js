@@ -12,9 +12,13 @@ const PostDetail = ({ post }) => {
                     <p className="card-text">{post.content}</p>
                     <div className="card-text-meta">
                         <p className="text-muted">Author: {post.author}</p>
-                        <p className="text-muted">Published At: {post.publishedAt}</p>
+                        <p className="text-muted">Published At: {new Date(post.publishedAt).toLocaleDateString()}</p>
                     </div>
-
+                    <div className="card-actions">
+                        <a href="#" className="btn btn-primary">
+                            Read More
+                        </a>
+                    </div>
                 </div>
             </div>
             <style jsx>{`
@@ -25,14 +29,16 @@ const PostDetail = ({ post }) => {
                     border: 1px solid #ddd;
                     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
                     background-color: #fff;
+                    font-family: 'Sen', sans-serif;
                 }
 
                 .card-body {
                     padding: 20px;
+                    font-family: 'Sen', sans-serif;
                 }
 
                 .card-title {
-                    font-size: 24px;
+                    font-size: 28px;
                     color: #333;
                     margin-bottom: 16px;
                 }
@@ -47,6 +53,7 @@ const PostDetail = ({ post }) => {
                 .card-text {
                     color: #555;
                     line-height: 1.6;
+                    font-family: 'Sen', sans-serif;
                 }
 
                 .card-text-meta {
@@ -58,6 +65,10 @@ const PostDetail = ({ post }) => {
                 .text-muted {
                     color: #777;
                     font-size: 14px;
+                }
+
+                .card-actions {
+                    margin-top: 20px;
                 }
 
                 .btn-primary {

@@ -22,7 +22,7 @@ const PostList = ({ posts, loadMore }) => {
                 {posts.map((post, index) => (
                     <div key={post.id} className="col-md-6 mb-4">
                         <div className="card">
-                            <Link href={{ pathname: '/posts/[id]', query: { post: JSON.stringify(post) } }} as={`/posts/${post.id}`}>
+                            <Link href="/posts/[id]" as={`/posts/${post.id}`}>
 
                                 {post.image && <img src={post.image} alt={`Image for ${post.title}`} className="card-img-top" />}
                                 <div className="card-body">
@@ -43,29 +43,30 @@ const PostList = ({ posts, loadMore }) => {
                 </div>
             )}
             <style jsx>{`
-                /* Override Bootstrap card styling */
+            
                 .card {
                     border: 1px solid #ddd;
                     border-radius: 8px;
                     transition: transform 0.2s;
+                    font-family: 'Sen', sans-serif;
                 }
 
-                /* Hover effect for cards */
+               
                 .card:hover {
                     transform: scale(1.05);
                 }
 
-                /* Override Bootstrap card image styling */
+            
                 .card-img-top {
                     max-width: 100%;
                     height: auto;
                     border-radius: 8px 8px 0 0;
                 }
 
-                /* Override Bootstrap card text styling */
                 .card-text {
                     color: #555;
                     line-height: 1.6;
+                    font-family: 'Sen', sans-serif;
                 }
 
                 /* Limit post content to two lines */
@@ -77,7 +78,7 @@ const PostList = ({ posts, loadMore }) => {
                     -webkit-box-orient: vertical;
                 }
 
-                /* Custom styles for the "Load More" button */
+      
                 .btn-primary {
                     background-color: #0070f3;
                     color: #fff;

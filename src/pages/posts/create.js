@@ -42,7 +42,7 @@ const CreatePost = () => {
 
     return (
         <Layout>
-            <div style={containerStyle}>
+            <div className="container" style={containerStyle}>
                 <h2 style={headingStyle}>Create a New Blog</h2>
                 <PostForm
                     formData={formData}
@@ -51,6 +51,12 @@ const CreatePost = () => {
                     isSubmitting={isSubmitting}
                 />
             </div>
+            <style jsx>{`
+               
+                .container {
+                    font-family: 'Sen', sans-serif;
+                }
+            `}</style>
         </Layout>
     );
 };
@@ -61,6 +67,7 @@ const containerStyle = {
     alignItems: 'center',
     justifyContent: 'center',
     minHeight: '100vh',
+
 };
 
 const headingStyle = {

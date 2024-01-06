@@ -43,6 +43,8 @@ const Home = ({ initialPosts }) => {
             <Head>
                 <title>Bansal App</title>
                 <meta name="description" content="Blogging Page " />
+                <link href="https://fonts.googleapis.com/css2?family=Courgette&family=Freehand&family=Sen&display=swap"
+                    rel="stylesheet" />
 
             </Head>
             <PostList posts={posts} loadMore={loadMorePosts} />
